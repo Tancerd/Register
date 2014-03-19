@@ -5,6 +5,6 @@ import java.util.List;
 import org.pwr.register.model.User;
 
 public interface UserService {
-	public User getUserByLogin(String login);
+	public User getUserById(Integer id);
 	public List getAllUsers();
 }

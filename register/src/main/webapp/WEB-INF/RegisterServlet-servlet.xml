@@ -11,7 +11,7 @@
 	<!-- <mvc:resources mapping ="/resources/**" location="/resources/" /> -->
 	<context:component-scan base-package="org.pwr.register" />
 	<mvc:annotation-driven />
-	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
@@ -33,37 +33,6 @@
 		</property>
 	</bean>
 	
-	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/register" />
-		<property name="username" value="root" />
-		<property name="password" value="root" />
-		<property name="validationQuery" value="SELECT 1" />
-	</bean>
-
-	<!-- Hibernate Session Factory -->
-	<bean id="mySessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="myDataSource" />
-		<property name="packagesToScan">
-			<array>
-				<value>org.pwr.register.model</value>
-			</array>
-		</property>
-		<property name="hibernateProperties">
-			<value>
-				hibernate.dialect=org.hibernate.dialect.MySQLDialect
-			</value>
-		</property>
-	</bean>
-
-	<!-- Hibernate Transaction Manager -->
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="mySessionFactory" />
-	</bean>
 	
-	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	</beans>

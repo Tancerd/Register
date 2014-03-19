@@ -7,6 +7,7 @@ import org.pwr.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
@@ -20,12 +21,10 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping({"/test"})
-	public String testPage()
+	@RequestMapping(value = "/test", produces = "application/json")
+	public @ResponseBody User testPage()
 	{
-		String page = "";
-		page += ((User)userService.getUserByLogin("test")).getId();
-		return page;
+		return ((User)userService.getUserById(1));
 	}
 	
 	@RequestMapping({"/test2"})

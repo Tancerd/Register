@@ -35,9 +35,9 @@ public class UserDAO {
 	}
 
 	@Transactional
-	public User findByLogin(String login) {
+	public User findById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		User user = (User)session.get(User.class, login);
+		User user = (User)session.get(User.class, id);
 		return user;
 	}
 	

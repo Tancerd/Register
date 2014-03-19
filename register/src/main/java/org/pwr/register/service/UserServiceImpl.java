@@ -13,8 +13,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO userDAO;
 	
-	public User getUserByLogin(String login) {
-		return userDAO.findByLogin(login);
+	public User getUserById(Integer id) {
+		return userDAO.findById(id);
 	}
 
 	public List getAllUsers() {
