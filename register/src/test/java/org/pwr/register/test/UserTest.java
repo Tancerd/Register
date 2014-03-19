@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
+import org.pwr.register.model.User;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -16,11 +16,10 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.api.client.filter.LoggingFilter;
 
-public class LoginTest  {
-
+public class UserTest {
 	private WebResource webResource;
 	private Client client;
-	private static final String BASE_URI = "http://localhost:8080/register/login/";
+	private static final String BASE_URI = "http://localhost:8080/register/register/";
 	
 	@Before
 	public void prepareConnection()
@@ -32,20 +31,34 @@ public class LoginTest  {
 	}
 	
 	@Test
-	public void correctLogin()
+	public void correctLoginAdmin()
 	{
-		client.addFilter(new HTTPBasicAuthFilter("test", "test"));
+		client.addFilter(new HTTPBasicAuthFilter("test2", "test2"));
 		ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
-		assertEquals(204, response.getStatus()); //no content
+		assertEquals(204, response.getStatus());
 	}
 	
 	@Test
-	public void wrongLogin()
+	public void post()
 	{
-		client.addFilter(new HTTPBasicAuthFilter("test", "test123"));
+		client.addFilter(new HTTPBasicAuthFilter("test2", "test2"));
+		ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).post(
+				ClientResponse.class, creatTestUser());
+	/*
+		client.addFilter(new HTTPBasicAuthFilter("test", "test"));
 		ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
-		assertEquals(401, response.getStatus()); //authentication is possible but has failed
+                */
+		assertEquals(409, response.getStatus()); //no content
 	}
+	
+	private User creatTestUser() {
+		User user = new User();
+		user.setLogin("POST");
+		user.setPassword("POST");
+		user.setRole("ROLE_USER");
+		return user;
+	}
+
 }

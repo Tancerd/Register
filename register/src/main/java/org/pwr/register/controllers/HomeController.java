@@ -24,7 +24,7 @@ public class HomeController {
 	@RequestMapping(value = "/test", produces = "application/json")
 	public @ResponseBody User testPage()
 	{
-		return ((User)userService.getUserById(1));
+		return ((User)userService.getUserByLogin("test"));
 	}
 	
 	@RequestMapping({"/test2"})

@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>USER</h2>
+<h2>ADMIN</h2>
 </body>
 </html>
