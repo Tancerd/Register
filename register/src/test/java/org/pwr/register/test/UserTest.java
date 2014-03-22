@@ -50,12 +50,13 @@ public class UserTest {
 		ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
                 */
-		assertEquals(409, response.getStatus()); //no content
+		//assertEquals(409, response.getStatus()); //Conflict
+		assertEquals(201, response.getStatus()); //CREATED
 	}
 	
 	private User creatTestUser() {
 		User user = new User();
-		user.setLogin("POST");
+		user.setLogin("POST1");
 		user.setPassword("POST");
 		user.setRole("ROLE_USER");
 		return user;

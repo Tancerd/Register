@@ -54,7 +54,9 @@ public class UserDAO {
 	public User findByLogin(String login) {
 		Session session = sessionFactory.getCurrentSession();
 		List users = session.createQuery("from User where login = \'" + login + "\'").list();
-		return (User)users.get(0);
+		if (users.size() != 0)
+			return (User)users.get(0);
+		else return null;
 	}
 
 }
