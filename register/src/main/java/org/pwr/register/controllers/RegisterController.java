@@ -20,7 +20,7 @@ public class RegisterController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void register()
+	public void isAdminLogged()
 	{
 		
 	}
@@ -30,11 +30,11 @@ public class RegisterController {
 	{
 		if (userService.getUserByLogin(user.getLogin()) == null && userService.registerUser(user))
 		{
-			return new ResponseEntity<User>(user, HttpStatus.CREATED);
+		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
 		else
 		{
-			return new ResponseEntity<User>((User)null, HttpStatus.CONFLICT);
+		return new ResponseEntity<User>((User)null, HttpStatus.CONFLICT);
 		}
 	}
 }
