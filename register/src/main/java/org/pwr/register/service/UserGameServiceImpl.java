@@ -3,23 +3,24 @@ package org.pwr.register.service;
 import java.util.List;
 
 import org.pwr.register.dao.UserGameDAO;
-import org.pwr.register.model.User;
 import org.pwr.register.model.UserGame;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserGameServiceImpl implements UserGameService{
 
-	public User getUserGameById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	@Autowired
+	private UserGameDAO userGameDAO;
+	
+	public UserGame getUserGameById(Integer id) {
+		return userGameDAO.getUserGameByID(id);
 	}
 
 	public List getAllUsersGames() {
-		// TODO Auto-generated method stub
-		return null;
+		return userGameDAO.getAllUsersGames();
 	}
 
 	public boolean addUserGame(UserGame userGame) {
-		return UserGameDAO.save(userGame);
+		return userGameDAO.save(userGame);
 	}
 
 }

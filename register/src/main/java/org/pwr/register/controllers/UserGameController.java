@@ -18,4 +18,13 @@ public class UserGameController {
 		userGameService.addUserGame(userGame);
 	}
 	
+	@RequestMapping("/getUserGame")
+	public void getAllUsersGames() {
+		userGameService.getAllUsersGames();
+	}
+
+	@RequestMapping("/getUserGameById/{id}")
+	public void getUserGameById() {
+		
+	}
 }
