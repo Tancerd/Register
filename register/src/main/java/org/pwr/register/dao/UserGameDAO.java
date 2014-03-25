@@ -3,6 +3,7 @@ package org.pwr.register.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.pwr.register.model.UserGame;
@@ -37,8 +38,10 @@ public class UserGameDAO {
 	@Transactional
 	public UserGame getUserGameByID(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		UserGame usersGame = new UserGame();//session.createQuery("from UserGame");
-		return usersGame;
+		Query query = session.createQuery("from user_game where id = :id ");
+		query.setParameter("id", id);
+		List list = query.list();
+		return (UserGame)list.get(0);
 	}
 
 }
