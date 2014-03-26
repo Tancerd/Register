@@ -2,8 +2,12 @@ package org.pwr.register.test;
 
 import static org.junit.Assert.assertEquals;
 
+import javax.ws.rs.core.MediaType;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.http.HttpStatus;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;

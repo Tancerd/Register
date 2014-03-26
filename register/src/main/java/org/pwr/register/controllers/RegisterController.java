@@ -1,5 +1,7 @@
 package org.pwr.register.controllers;
 
+import org.pwr.register.dto.UserDTO;
+import org.pwr.register.mapper.UserMapper;
 import org.pwr.register.model.User;
 import org.pwr.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +20,26 @@ public class RegisterController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserMapper userMapper;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void isAdminLogged()
+	public void register()
 	{
 		
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<User> registerPOST(@RequestBody User user)
+	public ResponseEntity<UserDTO> registerPOST(@RequestBody UserDTO userDTO)
 	{
-		if (userService.getUserByLogin(user.getLogin()) == null && userService.registerUser(user))
+		if (userService.getUserByLogin(userDTO.getLogin()) == null && userService.registerUser(userMapper.map(userDTO)))
 		{
-		return new ResponseEntity<User>(user, HttpStatus.CREATED);
+			return new ResponseEntity<UserDTO>(userDTO, HttpStatus.CREATED);
 		}
 		else
 		{
-		return new ResponseEntity<User>((User)null, HttpStatus.CONFLICT);
+			return new ResponseEntity<UserDTO>((UserDTO)null, HttpStatus.CONFLICT);
 		}
 	}
 }

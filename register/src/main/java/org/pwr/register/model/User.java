@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "user", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "login"),
 		@UniqueConstraint(columnNames = "id") })
-@XmlRootElement
+
 public class User implements Serializable {
 
 	@Id

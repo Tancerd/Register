@@ -5,7 +5,9 @@ import java.util.List;
 import org.pwr.register.dao.UserGameDAO;
 import org.pwr.register.model.UserGame;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserGameServiceImpl implements UserGameService{
 
 	@Autowired

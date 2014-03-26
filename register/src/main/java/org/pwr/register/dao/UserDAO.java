@@ -24,7 +24,7 @@ public class UserDAO {
 			return true;
 		} catch (HibernateException e) {
 			return false;
-		}
+		} 
 	}
 
 	public void delete(User user) {
@@ -48,16 +48,14 @@ public class UserDAO {
 		User user = (User) session.get(User.class, id);
 		return user;
 	}
-
+	
 	@Transactional
 	public User findByLogin(String login) {
 		Session session = sessionFactory.getCurrentSession();
-		List users = session.createQuery(
-				"from User where login = \'" + login + "\'").list();
+		List users = session.createQuery("from User where login = \'" + login + "\'").list();
 		if (users.size() != 0)
-			return (User) users.get(0);
-		else
-			return null;
+			return (User)users.get(0);
+		else return null;
 	}
 
 }

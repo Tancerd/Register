@@ -7,25 +7,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class UserGameController {
 	
 	@Autowired
-	UserGameService userGameService;
+	private UserGameService userGameService;
 	
-	@RequestMapping("/createGame/{id}")
+	@RequestMapping(value = "/userGame/", method = RequestMethod.POST)
 	public void createGameForUser(@RequestBody UserGame userGame) {
 		userGameService.addUserGame(userGame);
 	}
 	
-	@RequestMapping("/getUserGame")
+	@RequestMapping("/allGames/")
 	public void getAllUsersGames() {
 		userGameService.getAllUsersGames();
 	}
 
-	@RequestMapping("/getUserGameById/{id}")
-	public UserGame getUserGameById(@PathVariable Integer id) {
-		return userGameService.getUserGameById(id);
+	@RequestMapping(value = "/userGame/", method = RequestMethod.GET)
+	public UserGame getUserGameById() {
+		return userGameService.getUserGameById(0);
 	}
 }

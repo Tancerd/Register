@@ -34,6 +34,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/register" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
+		<property name="validationQuery" value="SELECT 1" />
 	</bean>
 
 	<!-- Hibernate Session Factory -->

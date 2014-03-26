@@ -6,6 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.pwr.register.dto.UserDTO;
 import org.pwr.register.model.User;
 
 import com.sun.jersey.api.client.Client;
@@ -54,11 +55,10 @@ public class UserTest {
 		assertEquals(201, response.getStatus()); //CREATED
 	}
 	
-	private User creatTestUser() {
-		User user = new User();
+	private UserDTO creatTestUser() {
+		UserDTO user = new UserDTO();
 		user.setLogin("POST1");
 		user.setPassword("POST");
-		user.setRole("ROLE_USER");
 		return user;
 	}
 
