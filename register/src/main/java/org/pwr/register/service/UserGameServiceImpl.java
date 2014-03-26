@@ -13,8 +13,8 @@ public class UserGameServiceImpl implements UserGameService{
 	@Autowired
 	private UserGameDAO userGameDAO;
 	
-	public UserGame getUserGameById(Integer id) {
-		return userGameDAO.getUserGameByID(id);
+	public Integer getUserGameByLogin(String login) {
+		return userGameDAO.getUserGameByID(login);
 	}
 
 	public List getAllUsersGames() {
@@ -23,6 +23,10 @@ public class UserGameServiceImpl implements UserGameService{
 
 	public boolean addUserGame(UserGame userGame) {
 		return userGameDAO.save(userGame);
+	}
+
+	public boolean createNewGame(Integer id) {
+		return userGameDAO.createNewGame(id);
 	}
 
 }

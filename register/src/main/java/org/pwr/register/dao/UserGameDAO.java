@@ -34,14 +34,29 @@ public class UserGameDAO {
 			return false;
 		}
 	}
-	
+
 	@Transactional
-	public UserGame getUserGameByID(Integer id) {
+	public Integer getUserGameByID(String login) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from user_game where id = :id ");
-		query.setParameter("id", id);
-		List list = query.list();
-		return (UserGame)list.get(0);
+		Query query = session.createQuery("select id from user where login = :login ");
+		query.setParameter("login", login);
+		Integer id = (Integer) query.uniqueResult();
+		query = session.createQuery("select points from user_game where id = :id ");
+		query.setParameter("id", id.toString());
+		return (Integer) query.uniqueResult();
 	}
 
+	@Transactional
+	public boolean createNewGame(Integer id) {
+		try {
+			UserGame userGame = new UserGame();
+			userGame.setId(id);
+			Session session = sessionFactory.getCurrentSession();
+			session.save(userGame);
+			return true;
+		} catch (HibernateException e) {
+			return false;
+		}
+
+	}
 }
