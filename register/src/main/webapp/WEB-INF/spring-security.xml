@@ -9,6 +9,8 @@
 		<logout logout-url="/logout" />
 		<intercept-url pattern="/login/**" access="ROLE_USER" />
 		<intercept-url pattern="/register/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/commonGame/**" access="ROLE_USER" />
+		<intercept-url pattern="/adminGame/**" access="ROLE_ADMIN" />
 	</http>
 
 
