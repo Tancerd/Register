@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/adminGame/")
+@RequestMapping("/adminGame")
 public class AdminGameController {
 
 	private GameUserMapper gameUserMapper;
@@ -30,7 +30,7 @@ public class AdminGameController {
 
 	@RequestMapping("/allGames/")
 	public List getAllUsersGames() {
-		return gameUserMapper.mapList(userGameService.getAllUsersGames()); 
+		return gameUserMapper.mapList(userGameService.getAllUsersGames());
 	}
 
 	@RequestMapping(value = "/userGame/", method = RequestMethod.GET)
@@ -46,5 +46,4 @@ public class AdminGameController {
 	public boolean createNewGame(@PathVariable Integer id) {
 		return userGameService.createNewGame(id);
 	}
-
 }
