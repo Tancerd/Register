@@ -25,16 +25,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserGame implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = true)
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "user")
 	@OneToOne(fetch = FetchType.EAGER)
 	private User user;
 	@Column(name = "end_time")
 	private Timestamp endTime;  // zmieniæ na Date
 	@Column(name = "points")
-	private int points;
+	private Integer points;
 	/*
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="game")
 	private Set<DoneQuest> doneQuests;

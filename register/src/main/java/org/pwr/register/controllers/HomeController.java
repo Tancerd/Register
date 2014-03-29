@@ -22,6 +22,9 @@ public class HomeController {
 	
 	@Autowired
 	private GameUserMapper gameUserMapper;
+	
+	@Autowired
+	private UserMapper userMapper;
 
 	@RequestMapping({"/", "/home"})
 	public String homePage()
@@ -37,13 +40,19 @@ public class HomeController {
 		else return null;
 	}
 	
-	@RequestMapping({"/test2"})
-	public String testPage2()
+	@RequestMapping(value = "/test2/{login}", produces = "application/json")
+	public @ResponseBody UserDTO test2Page(@PathVariable String login)
 	{
-		String page = "";
-		List<User> users = userService.getAllUsers();
-		for (User u : users)
-			page += u.getPassword() + " ";
-		return page;
+		if (userService.getUserByLogin(login) != null)
+			return userMapper.map(userService.getUserByLogin(login));
+		else return null;
+	}
+	
+	@RequestMapping(value = "/test3/{id}", produces = "application/json")
+	public @ResponseBody UserDTO testPage(@PathVariable Integer id)
+	{
+		if (userService.getUserById(id) != null)
+			return userMapper.map(userService.getUserById(id));
+		else return null;
 	}
 }

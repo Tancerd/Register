@@ -24,7 +24,7 @@ public class UserGameDAO {
 	@Transactional
 	public List getAllUsersGames() {
 		Session session = sessionFactory.getCurrentSession();
-		List users = session.createQuery("from user_game").list();
+		List users = session.createQuery("from UserGame").list();
 		return users;
 	}
 
@@ -40,27 +40,30 @@ public class UserGameDAO {
 	}
 
 	@Transactional
-	public Integer getUserGameByID(String login) {
+	public UserGame getUserGameByID(String login) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("select id from user where login = :login ");
+		Query query = session.createQuery("from User where login = :login ");
 		query.setParameter("login", login);
-		Integer id = (Integer) query.uniqueResult();
-		query = session.createQuery("select points from user_game where id = :id ");
-		query.setParameter("id", id.toString());
-		return (Integer) query.uniqueResult();
+		Integer id = ((User) query.uniqueResult()).getId();
+		return (UserGame)session.get(UserGame.class, id);
 	}
 
 	@Transactional
-	public boolean createNewGame(Integer id) {
+	public boolean createNewGame(String login) {
 		try {
-			UserGame userGame = new UserGame();
-			User u = userDAO.findById(id);
-			u.setUserGame(userGame);
-			Session session = sessionFactory.getCurrentSession();
-			session.update(u);
-			userGame.setUser(u);
-			session.save(userGame);
-			return true;
+			User u = userDAO.findByLogin(login);
+			if (u.getUserGame() == null)
+			{
+				UserGame userGame = new UserGame();
+				
+				userGame.setPoints(0);
+				userGame.setUser(u);
+				Session session = sessionFactory.getCurrentSession();
+				session.save(userGame);
+				
+				return true;
+			}
+			else return false;
 		} catch (HibernateException e) {
 			return false;
 		}
