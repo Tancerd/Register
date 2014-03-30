@@ -1,7 +1,6 @@
 package org.pwr.register.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -32,7 +31,7 @@ public class UserGame implements Serializable{
 	@OneToOne(fetch = FetchType.EAGER)
 	private User user;
 	@Column(name = "end_time")
-	private Date endTime;  // zmieniæ na Date
+	private Date endTime;  
 	@Column(name = "points")
 	private Integer points;
 	/*

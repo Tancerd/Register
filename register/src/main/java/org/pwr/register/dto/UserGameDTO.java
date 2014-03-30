@@ -32,9 +32,8 @@ public class UserGameDTO implements Serializable{
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	@JsonSerialize(using = JsonDateSerializer.class, include=JsonSerialize.Inclusion.ALWAYS)
+	@JsonSerialize(using = JsonDateSerializer.class)
 	public Date getEndTime() {
-		System.out.println("-----------------GET DATA");
 		return endTime;
 	}
 	public void setEndTime(Date endTime) {
