@@ -1,9 +1,10 @@
 package org.pwr.register.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.pwr.register.dto.UserDTO;
 import org.pwr.register.model.User;
-import org.pwr.register.model.UserGame;
-import org.pwr.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,14 @@ public class UserMapper {
 		userDTO.setPassword(null);
 		userDTO.setUserGame(userGameMapper.map(user.getUserGame()));
 		return userDTO;
+	}
+	
+	public List<UserDTO> listMap(List<User> list) {
+		List<UserDTO> listDTO = new ArrayList<UserDTO>();
+		for (User user : list) {
+			listDTO.add(map(user));
+		}
+		return listDTO;
 	}
 	
 }

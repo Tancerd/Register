@@ -58,6 +58,11 @@ public class AdminGameController {
 		}
 	}
 
+	@RequestMapping(value = "/allUsers")
+	public @ResponseBody List getAllUsers() {
+		return userMapper.listMap(userService.getAllUsers());
+	}
+	
 	/*
 	@RequestMapping(value = "/userGame/", method = RequestMethod.GET)
 	public UserGameDTO getUserGameByLogin() {
