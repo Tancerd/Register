@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.pwr.register.dto.UserDTO;
 import org.pwr.register.mapper.GameUserMapper;
-import org.pwr.register.model.UserGame;
+import org.pwr.register.mapper.UserMapper;
 import org.pwr.register.service.UserGameService;
+import org.pwr.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
-@RequestMapping("/adminGame")
+@RequestMapping("/adminPanel")
 public class AdminGameController {
 
 	@Autowired
 	private GameUserMapper gameUserMapper;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private UserMapper userMapper;
 	
 	@Autowired
 	private UserGameService userGameService;
@@ -37,6 +44,19 @@ public class AdminGameController {
 	public @ResponseBody List getAllUsersGames() {
 		return gameUserMapper.mapList(userGameService.getAllUsersGames());
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<UserDTO> registerPOST(@RequestBody UserDTO userDTO)
+	{
+		if (userService.getUserByLogin(userDTO.getLogin()) == null && userService.registerUser(userMapper.map(userDTO)))
+		{
+			return new ResponseEntity<UserDTO>(userDTO, HttpStatus.CREATED);
+		}
+		else
+		{
+			return new ResponseEntity<UserDTO>((UserDTO)null, HttpStatus.CONFLICT);
+		}
+	}
 
 	/*
 	@RequestMapping(value = "/userGame/", method = RequestMethod.GET)
@@ -49,6 +69,13 @@ public class AdminGameController {
 	}
 	*/
 
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void register()
+	{
+		
+	}
+	
 	@RequestMapping(value = "/newGame/{login}", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public ResponseEntity<Object> createNewGame(@PathVariable String login) {
