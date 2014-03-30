@@ -5,14 +5,13 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.pwr.register.support.JsonDateSerializer;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
 
 @XmlRootElement
+@JsonAutoDetect
 public class UserGameDTO implements Serializable{
 	
 	private String user;
