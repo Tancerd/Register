@@ -32,7 +32,7 @@ public class UserGame implements Serializable{
 	@OneToOne(fetch = FetchType.EAGER)
 	private User user;
 	@Column(name = "end_time")
-	private Timestamp endTime;  // zmieniæ na Date
+	private Date endTime;  // zmieniæ na Date
 	@Column(name = "points")
 	private Integer points;
 	/*
@@ -55,7 +55,7 @@ public class UserGame implements Serializable{
 	public Date getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Timestamp endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 	public int getPoints() {
