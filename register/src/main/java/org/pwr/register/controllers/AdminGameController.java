@@ -58,8 +58,8 @@ public class AdminGameController {
 		}
 	}
 
-	@RequestMapping(value = "/allUsers")
-	public @ResponseBody List getAllUsers() {
+	@RequestMapping(value = "/allUsers/")
+	public @ResponseBody List<UserDTO> getAllUsers() {
 		return userMapper.listMap(userService.getAllUsers());
 	}
 	
