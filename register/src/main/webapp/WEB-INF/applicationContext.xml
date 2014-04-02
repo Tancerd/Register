@@ -61,8 +61,8 @@
 		<property name="sessionFactory" ref="mySessionFactory" />
 	</bean>
 	
-	<task:annotation-driven />
-	<bean id="perioid" class="org.pwr.register.Perioid"></bean>
+	<!--  <task:annotation-driven />
+	<bean id="perioid" class="org.pwr.register.background.Perioid"></bean> -->
 
 </beans>
 

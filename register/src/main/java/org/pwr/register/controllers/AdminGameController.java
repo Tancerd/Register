@@ -45,7 +45,7 @@ public class AdminGameController {
 		return gameUserMapper.mapList(userGameService.getAllUsersGames());
 	}
 
-	@RequestMapping(value = "/deleteUser/{userName}", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteUser/{userName}", method = RequestMethod.DELETE)
 	public @ResponseBody String deleteUser(@PathVariable String userName) {
 		return userService.removeUser(userName);
 	}
