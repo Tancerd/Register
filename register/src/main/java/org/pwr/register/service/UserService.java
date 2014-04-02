@@ -9,4 +9,5 @@ public interface UserService {
 	public User getUserByLogin(String login);
 	public List getAllUsers();
 	public boolean registerUser(User user);
+	public String removeUser(String userName);
 }

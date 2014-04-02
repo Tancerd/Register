@@ -44,6 +44,11 @@ public class AdminGameController {
 	public @ResponseBody List getAllUsersGames() {
 		return gameUserMapper.mapList(userGameService.getAllUsersGames());
 	}
+
+	@RequestMapping(value = "/deleteUser/{userName}", method = RequestMethod.POST)
+	public @ResponseBody String deleteUser(@PathVariable String userName) {
+		return userService.removeUser(userName);
+	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<UserDTO> registerPOST(@RequestBody UserDTO userDTO)

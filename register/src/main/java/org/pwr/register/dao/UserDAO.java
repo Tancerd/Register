@@ -3,6 +3,7 @@ package org.pwr.register.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.pwr.register.model.User;
@@ -24,11 +25,21 @@ public class UserDAO {
 			return true;
 		} catch (HibernateException e) {
 			return false;
-		} 
+		}
 	}
 
-	public void delete(User user) {
-
+	@Transactional
+	public String delete(String userName) {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			Query deleteQUery = session.createQuery("delete User where login = :login");
+			deleteQUery.setParameter("login", userName);
+			deleteQUery.executeUpdate();
+			return "Success!";
+		} catch (Exception e) {
+			System.err.print(e);
+			return "Hibernate... we have a problem";
+		}
 	}
 
 	public void saveOrUpdate() {
@@ -48,14 +59,16 @@ public class UserDAO {
 		User user = (User) session.get(User.class, id);
 		return user;
 	}
-	
+
 	@Transactional
 	public User findByLogin(String login) {
 		Session session = sessionFactory.getCurrentSession();
-		List users = session.createQuery("from User where login = \'" + login + "\'").list();
+		List users = session.createQuery(
+				"from User where login = \'" + login + "\'").list();
 		if (users.size() != 0)
-			return (User)users.get(0);
-		else return null;
+			return (User) users.get(0);
+		else
+			return null;
 	}
 
 }
