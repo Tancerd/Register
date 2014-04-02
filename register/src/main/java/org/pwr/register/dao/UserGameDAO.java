@@ -69,4 +69,10 @@ public class UserGameDAO {
 		}
 
 	}
+
+	@Transactional
+	public void deleteGame(User user) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(user.getUserGame());
+	}
 }

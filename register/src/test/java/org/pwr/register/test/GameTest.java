@@ -1,13 +1,12 @@
 package org.pwr.register.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import javax.ws.rs.core.MediaType;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.pwr.register.dto.UserDTO;
-import org.pwr.register.model.User;
+import org.pwr.register.dto.UserGameDTO;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -17,10 +16,11 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.api.client.filter.LoggingFilter;
 
-public class UserTest {
+public class GameTest {
 	private WebResource webResource;
 	private Client client;
-	private static final String BASE_URI = "http://localhost:8080/register/register/";
+	private static final String GAME_URI = "http://localhost:8080/register/adminPanel/game/michal";
+	private static final String NEWGAME_URI = "http://localhost:8080/register/adminPanel/newGame/michal";
 	
 	@Before
 	public void prepareConnection()
@@ -28,12 +28,13 @@ public class UserTest {
 		ClientConfig config = new DefaultClientConfig();
 		client = Client.create(config);
 		client.addFilter(new LoggingFilter());
-		webResource = client.resource(BASE_URI);
+		
 	}
 	
 	@Test
-	public void correctLoginAdmin()
+	public void createNewGame()
 	{
+		webResource = client.resource(NEWGAME_URI);
 		client.addFilter(new HTTPBasicAuthFilter("test2", "test2"));
 		ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
@@ -41,25 +42,23 @@ public class UserTest {
 	}
 	
 	@Test
-	public void post()
+	public void deleteGame()
 	{
+		webResource = client.resource(GAME_URI);
 		client.addFilter(new HTTPBasicAuthFilter("test2", "test2"));
-		ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).post(
-				ClientResponse.class, creatTestUser());
-	/*
-		client.addFilter(new HTTPBasicAuthFilter("test", "test"));
-		ClientResponse response = webResource.accept("application/json")
-                .get(ClientResponse.class);
-                */
-		//assertEquals(409, response.getStatus()); //Conflict
-		assertEquals(201, response.getStatus()); //CREATED
+		ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).delete(
+				ClientResponse.class);
+
+		assertEquals(204, response.getStatus()); 
 	}
 	
-	private UserDTO creatTestUser() {
-		UserDTO user = new UserDTO();
-		user.setLogin("POST3");
-		user.setPassword("POST");
-		return user;
+	@Test
+	public void getGame() {
+		webResource = client.resource(GAME_URI);
+		client.addFilter(new HTTPBasicAuthFilter("test2", "test2"));
+		ClientResponse response = webResource.accept("application/json")
+                .get(ClientResponse.class);
+		assertEquals(200, response.getStatus());
+		assertNotNull(response.getEntity(UserGameDTO.class));
 	}
-
 }

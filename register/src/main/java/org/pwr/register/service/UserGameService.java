@@ -9,4 +9,5 @@ public interface UserGameService {
 	public List getAllUsersGames();
 	public boolean addUserGame(UserGame userGame);
 	public boolean createNewGame(String login);
+	public void deleteGameByUserLogin(String login);
 }

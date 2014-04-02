@@ -34,7 +34,7 @@ public class LoginTest  {
 	@Test
 	public void correctLogin()
 	{
-		client.addFilter(new HTTPBasicAuthFilter("test", "test"));
+		client.addFilter(new HTTPBasicAuthFilter("michal", "michal"));
 		ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
 		assertEquals(204, response.getStatus()); //no content
