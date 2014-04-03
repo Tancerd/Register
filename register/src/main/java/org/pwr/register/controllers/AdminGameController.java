@@ -24,83 +24,98 @@ public class AdminGameController {
 
 	@Autowired
 	private GameUserMapper gameUserMapper;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	@Autowired
 	private UserGameService userGameService;
 
 	/*
-	@RequestMapping(value = "/userGame/", method = RequestMethod.POST)
-	public boolean createGameForUser(@RequestBody UserGame userGame) {
-		return userGameService.addUserGame(userGame);
-	}
-	*/
+	 * @RequestMapping(value = "/userGame/", method = RequestMethod.POST) public
+	 * boolean createGameForUser(@RequestBody UserGame userGame) { return
+	 * userGameService.addUserGame(userGame); }
+	 */
 	@RequestMapping("/allGames/")
-	public @ResponseBody List getAllUsersGames() {
+	public @ResponseBody
+	List getAllUsersGames() {
 		return gameUserMapper.mapList(userGameService.getAllUsersGames());
 	}
-// zwracac tak jak poniżej
+
+	// zwracac tak jak poniżej
 	@RequestMapping(value = "/deleteGame/{userName}", method = RequestMethod.DELETE)
-	public @ResponseBody HttpStatus deleteGame(@PathVariable String userName) {
-		userGameService.deleteGameByUserLogin(userName);	
-		return HttpStatus.ACCEPTED;
+	public @ResponseBody
+	ResponseEntity<String> deleteGame(@PathVariable String userName) {
+		userGameService.deleteGameByUserLogin(userName);
+		return new ResponseEntity<String>(userName, HttpStatus.ACCEPTED);
 	}
-	
+
 	@RequestMapping(value = "/deleteUser/{userName}", method = RequestMethod.DELETE)
-	public @ResponseBody String deleteUser(@PathVariable String userName) {
-		return userService.removeUser(userName);
-	}
-	
-	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<UserDTO> registerPOST(@RequestBody UserDTO userDTO)
-	{
-		if (userService.getUserByLogin(userDTO.getLogin()) == null && userService.registerUser(userMapper.map(userDTO)))
-		{
-			return new ResponseEntity<UserDTO>(userDTO, HttpStatus.CREATED);
+	public @ResponseBody
+	ResponseEntity<String> deleteUser(@PathVariable String userName) {
+		if (userService.removeUser(userName)) {
+			return new ResponseEntity<String>(userName, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<String>(userName,
+					HttpStatus.UNPROCESSABLE_ENTITY);
 		}
-		else
-		{
-			return new ResponseEntity<UserDTO>((UserDTO)null, HttpStatus.CONFLICT);
+	}
+
+	@RequestMapping(value = "/updateUser", method = RequestMethod.PUT, consumes = "application/json")
+	public
+	ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO user) {
+		System.out.println("asdas" + user);
+		userService.updateUser(user);
+		System.out.println("asdas");
+		if (userService.updateUser(user)) {
+			return new ResponseEntity<UserDTO>(user, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<UserDTO>(user,
+					HttpStatus.UNPROCESSABLE_ENTITY);
+		}
+	}
+
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<UserDTO> registerPOST(@RequestBody UserDTO userDTO) {
+		if (userService.getUserByLogin(userDTO.getLogin()) == null
+				&& userService.registerUser(userMapper.map(userDTO))) {
+			return new ResponseEntity<UserDTO>(userDTO, HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<UserDTO>((UserDTO) null,
+					HttpStatus.CONFLICT);
 		}
 	}
 
 	@RequestMapping(value = "/allUsers/")
-	public @ResponseBody List<UserDTO> getAllUsers() {
+	public @ResponseBody
+	List<UserDTO> getAllUsers() {
 		return userMapper.listMap(userService.getAllUsers());
 	}
-	
+
 	/*
-	@RequestMapping(value = "/userGame/", method = RequestMethod.GET)
-	public UserGameDTO getUserGameByLogin() {
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		String name = auth.getName();
-		
-		return userGameService.getUserGameByLogin(name);
-	}
-	*/
+	 * @RequestMapping(value = "/userGame/", method = RequestMethod.GET) public
+	 * UserGameDTO getUserGameByLogin() { Authentication auth =
+	 * SecurityContextHolder.getContext() .getAuthentication(); String name =
+	 * auth.getName();
+	 * 
+	 * return userGameService.getUserGameByLogin(name); }
+	 */
 
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void register()
-	{
-		
+	public void register() {
+
 	}
-	
+
 	@RequestMapping(value = "/newGame/{login}", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public ResponseEntity<Object> createNewGame(@PathVariable String login) {
-		if (userGameService.createNewGame(login))
-		{
+		if (userGameService.createNewGame(login)) {
 			return new ResponseEntity<Object>(null, HttpStatus.CREATED);
-		}
-		else
-		{
+		} else {
 			return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);
 		}
 	}

@@ -51,5 +51,4 @@ public class Quest {
 		this.defaultPoints = defaultPoints;
 	}
 	
-	
 }

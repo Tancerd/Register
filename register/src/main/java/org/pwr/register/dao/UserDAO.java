@@ -3,9 +3,9 @@ package org.pwr.register.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.pwr.register.dto.UserDTO;
 import org.pwr.register.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,21 +29,32 @@ public class UserDAO {
 	}
 
 	@Transactional
-	public String delete(String userName) {
+	public boolean delete(User user) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			Query deleteQUery = session.createQuery("delete User where login = :login");
-			deleteQUery.setParameter("login", userName);
-			deleteQUery.executeUpdate();
-			return "Success!";
+			if (!user.getRole().equals("ROLE_ADMIN")) {
+				session.delete(user);
+			} else
+				return false;
+			return true;
 		} catch (Exception e) {
 			System.err.print(e);
-			return "Hibernate... we have a problem";
+			return false;
 		}
 	}
 
-	public void saveOrUpdate() {
-
+	public boolean saveOrUpdate(User user, UserDTO userData) {
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			user.setLogin(userData.getLogin());
+			user.setPassword(userData.getPassword());
+//			user.setEmail(userData.getEmail());
+			session.update(user);
+			return true;
+		} catch (Exception ex) {
+			System.out.print(ex);
+			return false;
+		}
 	}
 
 	@Transactional

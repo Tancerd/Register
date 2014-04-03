@@ -13,17 +13,14 @@ public class QuestServiceImpl implements QuestService {
 	@Autowired
 	private QuestDAO questDAO;
 	
-	@Override
 	public List getAllQuests() {
 		return questDAO.findAll();
 	}
 
-	@Override
 	public Quest getQuest(int id) {
 		return questDAO.findQuestById(id);
 	}
 
-	@Override
 	public boolean deleteQuest(int id) {
 		Quest q = getQuest(id);
 		if (q != null)
@@ -31,7 +28,6 @@ public class QuestServiceImpl implements QuestService {
 		else return true;
 	}
 
-	@Override
 	public boolean deleteAllQuests() {
 		// TODO Auto-generated method stub
 		return false;
