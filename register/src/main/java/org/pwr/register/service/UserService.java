@@ -11,5 +11,5 @@ public interface UserService {
 	public List getAllUsers();
 	public boolean registerUser(User user);
 	public boolean removeUser(String userName);
-	public boolean updateUser(UserDTO user);
+	public boolean updateUser(UserDTO user, String login);
 }

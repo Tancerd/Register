@@ -64,17 +64,14 @@ public class AdminGameController {
 		}
 	}
 
-	@RequestMapping(value = "/updateUser", method = RequestMethod.PUT, consumes = "application/json")
+	@RequestMapping(value = "/updateUser/{login}", method = RequestMethod.PUT, consumes = "application/json")
 	public
-	ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO user) {
-		System.out.println("asdas" + user);
-		userService.updateUser(user);
-		System.out.println("asdas");
-		if (userService.updateUser(user)) {
+	ResponseEntity<UserDTO> updateUser(@PathVariable String login, @RequestBody UserDTO user) {
+		if (userService.updateUser(user, login)) {
 			return new ResponseEntity<UserDTO>(user, HttpStatus.ACCEPTED);
 		} else {
 			return new ResponseEntity<UserDTO>(user,
-					HttpStatus.UNPROCESSABLE_ENTITY);
+					HttpStatus.CONFLICT);
 		}
 	}
 

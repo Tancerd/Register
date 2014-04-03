@@ -43,12 +43,19 @@ public class UserDAO {
 		}
 	}
 
+	@Transactional
 	public boolean saveOrUpdate(User user, UserDTO userData) {
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			user.setLogin(userData.getLogin());
-			user.setPassword(userData.getPassword());
-//			user.setEmail(userData.getEmail());
+			if (!userData.getLogin().equals("")) {
+				user.setLogin(userData.getLogin());
+			}
+			if (!userData.getPassword().equals("")) {
+				user.setPassword(userData.getPassword());
+			}
+			/*if (`!userData.getEmail().equals("")) {
+				user.setEmail(userData.getEmail());)
+			user.setEmail(userData.getEmail());*/
 			session.update(user);
 			return true;
 		} catch (Exception ex) {
