@@ -44,7 +44,7 @@ public class AdminGameController {
 	public @ResponseBody List getAllUsersGames() {
 		return gameUserMapper.mapList(userGameService.getAllUsersGames());
 	}
-
+// zwracac tak jak poniżej
 	@RequestMapping(value = "/deleteGame/{userName}", method = RequestMethod.DELETE)
 	public @ResponseBody HttpStatus deleteGame(@PathVariable String userName) {
 		userGameService.deleteGameByUserLogin(userName);	
