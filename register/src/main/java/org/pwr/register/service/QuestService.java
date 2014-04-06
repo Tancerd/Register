@@ -10,4 +10,5 @@ public interface QuestService {
 	public Quest getQuest(int id);
 	public boolean deleteQuest(int id);
 	public boolean deleteAllQuests();
+	public boolean saveQuest(Quest quest);
 }

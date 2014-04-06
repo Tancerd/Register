@@ -33,4 +33,9 @@ public class QuestServiceImpl implements QuestService {
 		return false;
 	}
 
+	@Override
+	public boolean saveQuest(Quest quest) {
+		return questDAO.saveQuest(quest);
+	}
+
 }

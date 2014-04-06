@@ -3,18 +3,26 @@ package org.pwr.register.controllers;
 import java.util.List;
 
 import org.pwr.register.dto.UserDTO;
+import org.pwr.register.mapper.DoneQuestsMapper;
 import org.pwr.register.mapper.GameUserMapper;
+import org.pwr.register.mapper.QuestMapper;
 import org.pwr.register.mapper.UserMapper;
+import org.pwr.register.model.DoneQuest;
+import org.pwr.register.model.Quest;
+import org.pwr.register.service.DoneQuestService;
+import org.pwr.register.service.QuestService;
 import org.pwr.register.service.UserGameService;
 import org.pwr.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -34,6 +42,18 @@ public class AdminGameController {
 	@Autowired
 	private UserGameService userGameService;
 
+	@Autowired
+	private QuestService questService;
+	
+	@Autowired
+	private QuestMapper questMapper;
+	
+	@Autowired
+	private DoneQuestService doneQuestService;
+	
+	@Autowired
+	private DoneQuestsMapper doneQuestsMapper;
+	
 	/*
 	 * @RequestMapping(value = "/userGame/", method = RequestMethod.POST) public
 	 * boolean createGameForUser(@RequestBody UserGame userGame) { return
@@ -116,4 +136,20 @@ public class AdminGameController {
 			return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);
 		}
 	}
+	
+	@RequestMapping(value = "/allDoneQuests/", method = RequestMethod.GET)
+	public List getAllDoneQuests() {
+		return doneQuestsMapper.listDoneDTOMap(doneQuestService.getAllQuests());
+	}
+	
+	@RequestMapping(value = "/deleteDoneQuest/{userName}",method =  RequestMethod.GET)
+	public boolean removeDoneQuest(@PathVariable String userName) {
+		return doneQuestService.removeQuest(userName);
+	}
+
+	@RequestMapping(value = "/allQuests/",method =  RequestMethod.GET)
+	public List getAllQuests() {
+		return questService.getAllQuests();
+	}
+	
 }

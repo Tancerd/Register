@@ -33,7 +33,7 @@ public class DoneQuestsDAO {
 	}
 	
 	@Transactional
-	public boolean deleteDoneQuest(DoneQuest doneQuest) {
+	public boolean deleteDoneQuest(String doneQuest) {
 		try {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(doneQuest);
