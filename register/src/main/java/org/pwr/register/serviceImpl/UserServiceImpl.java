@@ -1,10 +1,11 @@
-package org.pwr.register.service;
+package org.pwr.register.serviceImpl;
 
 import java.util.List;
 
 import org.pwr.register.dao.UserDAO;
 import org.pwr.register.dto.UserDTO;
 import org.pwr.register.model.User;
+import org.pwr.register.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,10 @@
-package org.pwr.register.service;
+package org.pwr.register.serviceImpl;
 
 import java.util.List;
 
 import org.pwr.register.dao.DoneQuestsDAO;
 import org.pwr.register.model.DoneQuest;
+import org.pwr.register.service.DoneQuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DoneQuestServiceImpl implements DoneQuestService{

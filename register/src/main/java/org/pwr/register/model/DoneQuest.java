@@ -9,10 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "done_quest", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "id") })
 public class DoneQuest {
 
 	@Id

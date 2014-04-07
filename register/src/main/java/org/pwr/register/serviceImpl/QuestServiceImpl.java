@@ -1,9 +1,10 @@
-package org.pwr.register.service;
+package org.pwr.register.serviceImpl;
 
 import java.util.List;
 
 import org.pwr.register.dao.QuestDAO;
 import org.pwr.register.model.Quest;
+import org.pwr.register.service.QuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
