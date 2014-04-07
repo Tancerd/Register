@@ -22,11 +22,11 @@ public class DoneQuest {
 	
 	@JoinColumn(name = "game")
 	@OneToOne(fetch = FetchType.EAGER)
-	private UserGame game;
+	private Integer gameId;
 	
 	@JoinColumn(name = "quest")
 	@OneToOne(fetch = FetchType.EAGER)
-	private Quest quest;
+	private String questName;
 	
 	@Column(name = "extra_points", nullable = true, unique = false)
 	private Integer extraPoints;
@@ -40,22 +40,6 @@ public class DoneQuest {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public UserGame getGame() {
-		return game;
-	}
-
-	public void setGame(UserGame game) {
-		this.game = game;
-	}
-
-	public Quest getQuest() {
-		return quest;
-	}
-
-	public void setQuest(Quest quest) {
-		this.quest = quest;
 	}
 
 	public Integer getExtraPoints() {
@@ -72,6 +56,22 @@ public class DoneQuest {
 
 	public void setDoneTime(Date doneTime) {
 		this.doneTime = doneTime;
+	}
+
+	public Integer getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(Integer gameId) {
+		this.gameId = gameId;
+	}
+
+	public String getQuestName() {
+		return questName;
+	}
+
+	public void setQuest(String questName) {
+		this.questName = questName;
 	}
 	
 }

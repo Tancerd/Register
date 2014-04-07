@@ -20,8 +20,8 @@ public class DoneQuestsMapper {
 		DoneQuestDTO doneQuestDTO = new DoneQuestDTO();
 		doneQuestDTO.setDoneTime(doneQuest.getDoneTime());
 		doneQuestDTO.setExtraPoints(doneQuest.getExtraPoints());
-		doneQuestDTO.setGame(doneQuest.getGame());
-		doneQuestDTO.setQuest(doneQuest.getQuest());
+		doneQuestDTO.setGameId(doneQuest.getGameId());
+		doneQuestDTO.setQuestName(doneQuest.getQuestName());
 
 		return doneQuestDTO;
 	}

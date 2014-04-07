@@ -34,10 +34,8 @@ public class UserGame implements Serializable{
 	private Date endTime;  
 	@Column(name = "points")
 	private Integer points;
-	/*
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="game")
 	private Set<DoneQuest> doneQuests;
-	*/
 	
 	public int getId() {
 		return id;
@@ -63,12 +61,10 @@ public class UserGame implements Serializable{
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	/*
 	public Set<DoneQuest> getDoneQuests() {
 		return doneQuests;
 	}
 	public void setDoneQuests(Set<DoneQuest> doneQuests) {
 		this.doneQuests = doneQuests;
 	}
-	*/
 }

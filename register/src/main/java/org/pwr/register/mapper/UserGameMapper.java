@@ -8,16 +8,19 @@ import org.pwr.register.model.UserGame;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GameUserMapper {
+public class UserGameMapper {
 
 	public UserGameDTO map(UserGame userGame) {
+		
 		UserGameDTO userGameDTO = null;
+
 		if (userGame != null)
 		{
 			userGameDTO = new UserGameDTO();
 			userGameDTO.setUser(userGame.getUser().getLogin());
 			userGameDTO.setPoints(userGame.getPoints());
 			userGameDTO.setEndTime(userGame.getEndTime());
+			userGameDTO.setDoneQuests(userGame.getDoneQuests());
 		}
 
 		return userGameDTO;

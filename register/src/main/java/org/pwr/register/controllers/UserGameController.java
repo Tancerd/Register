@@ -1,7 +1,7 @@
 package org.pwr.register.controllers;
 
 import org.pwr.register.dto.UserGameDTO;
-import org.pwr.register.mapper.GameUserMapper;
+import org.pwr.register.mapper.UserGameMapper;
 import org.pwr.register.service.UserGameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserGameController {
 
 	@Autowired
-	private GameUserMapper gameUserMapper;
+	private UserGameMapper gameUserMapper;
 	
 	@Autowired
 	private UserGameService userGameService;

@@ -10,4 +10,5 @@ public interface UserGameService {
 	public boolean addUserGame(UserGame userGame);
 	public boolean createNewGame(String login);
 	public void deleteGameByUserLogin(String login);
+	public List getAllDoneQuests(String user);
 }

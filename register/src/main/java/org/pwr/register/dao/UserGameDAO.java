@@ -27,6 +27,13 @@ public class UserGameDAO {
 		List users = session.createQuery("from UserGame").list();
 		return users;
 	}
+	
+	@Transactional
+	public List getAllDoneQuests() {
+		Session session = sessionFactory.getCurrentSession();
+		List doneQuests = session.createQuery("from DoneQuest").list();
+		return doneQuests;
+	}
 
 	@Transactional
 	public boolean save(UserGame userGame) {

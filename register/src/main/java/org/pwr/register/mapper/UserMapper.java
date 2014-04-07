@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserMapper {
 	
 	@Autowired 
-	private GameUserMapper userGameMapper;
+	private UserGameMapper userGameMapper;
 	
 	
 	//Rejestracja

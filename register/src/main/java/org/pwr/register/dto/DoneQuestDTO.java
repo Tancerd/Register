@@ -14,22 +14,23 @@ import org.pwr.register.model.UserGame;
 @XmlRootElement
 public class DoneQuestDTO {
 
-	private UserGame game;
-	private Quest quest;
+	private Integer gameId;
+	private String questName;
 	private Integer extraPoints;
 	private Date doneTime;
 	
-	public UserGame getGame() {
-		return game;
+	public Integer getGameId() {
+		return gameId;
 	}
-	public void setGame(UserGame game) {
-		this.game = game;
+	public void setGameId(Integer gameId) {
+		this.gameId = gameId;
 	}
-	public Quest getQuest() {
-		return quest;
+	
+	public String getQuestName() {
+		return questName;
 	}
-	public void setQuest(Quest quest) {
-		this.quest = quest;
+	public void setQuestName(String questName) {
+		this.questName = questName;
 	}
 	public Integer getExtraPoints() {
 		return extraPoints;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.pwr.register.dto.UserDTO;
 import org.pwr.register.mapper.DoneQuestsMapper;
-import org.pwr.register.mapper.GameUserMapper;
+import org.pwr.register.mapper.UserGameMapper;
 import org.pwr.register.mapper.QuestMapper;
 import org.pwr.register.mapper.UserMapper;
 import org.pwr.register.model.DoneQuest;
@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class AdminGameController {
 
 	@Autowired
-	private GameUserMapper gameUserMapper;
+	private UserGameMapper gameUserMapper;
 
 	@Autowired
 	private UserService userService;
@@ -150,6 +150,11 @@ public class AdminGameController {
 	@RequestMapping(value = "/allQuests/",method =  RequestMethod.GET)
 	public List getAllQuests() {
 		return questService.getAllQuests();
+	}
+	
+	@RequestMapping(value = "/allUserDoneQuest/{user}", method = RequestMethod.GET)
+	public List getAllDoneQuest(@PathVariable String user) {
+		return userGameService.getAllDoneQuests(user); 
 	}
 	
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.pwr.register.dto.UserDTO;
 import org.pwr.register.dto.UserGameDTO;
-import org.pwr.register.mapper.GameUserMapper;
+import org.pwr.register.mapper.UserGameMapper;
 import org.pwr.register.mapper.UserMapper;
 import org.pwr.register.model.Quest;
 import org.pwr.register.service.QuestService;
@@ -24,7 +24,7 @@ public class HomeController {
 	private UserService userService;
 	
 	@Autowired
-	private GameUserMapper gameUserMapper;
+	private UserGameMapper gameUserMapper;
 	
 	@Autowired
 	private UserMapper userMapper;
