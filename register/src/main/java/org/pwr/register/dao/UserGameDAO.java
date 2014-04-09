@@ -48,11 +48,10 @@ public class UserGameDAO {
 
 	@Transactional
 	public UserGame getUserGameByID(String login) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from User where login = :login ");
-		query.setParameter("login", login);
-		Integer id = ((User) query.uniqueResult()).getId();
-		return (UserGame)session.get(UserGame.class, id);
+		User u = userDAO.findByLogin(login);
+		if (u != null)
+			return u.getUserGame();
+		else return null;
 	}
 
 	@Transactional

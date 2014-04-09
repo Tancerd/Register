@@ -16,46 +16,43 @@ public class DoneQuestsDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
-	
+
 	@Transactional
-	public DoneQuest findQuestById(int id)
-	{
+	public DoneQuest findQuestById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		DoneQuest doneQuest = (DoneQuest)session.get(DoneQuest.class, id);
+		DoneQuest doneQuest = (DoneQuest) session.get(DoneQuest.class, id);
 		return doneQuest;
 	}
-	
+
 	@Transactional
 	public List findAll() {
 		Session session = sessionFactory.getCurrentSession();
 		List doneQuests = session.createQuery("from DoneQuest").list();
 		return doneQuests;
 	}
-	
+
 	@Transactional
 	public boolean deleteDoneQuest(String doneQuest) {
 		try {
-		Session session = sessionFactory.getCurrentSession();
-		session.delete(doneQuest);
-		return true;
-		}
-		catch (Exception e) {
+			Session session = sessionFactory.getCurrentSession();
+			session.delete(doneQuest);
+			return true;
+		} catch (Exception e) {
 			System.err.println(e);
 			return false;
 		}
 	}
+
 	@Transactional
 	public boolean create(DoneQuest doneQuest) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.save(doneQuest);
 			return true;
-			}
-			catch (Exception e) {
-				System.err.println(e);
-				return false;
-			}
+		} catch (Exception e) {
+			System.err.println(e);
+			return false;
+		}
 	}
-	
-	
+
 }

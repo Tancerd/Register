@@ -2,6 +2,7 @@ package org.pwr.register.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "done_quests", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "id") })
-public class DoneQuest {
+public class DoneQuest implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

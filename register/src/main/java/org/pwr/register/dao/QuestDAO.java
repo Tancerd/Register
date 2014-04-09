@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.pwr.register.model.Quest;
+import org.pwr.register.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,25 +17,23 @@ public class QuestDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Transactional
-	public Quest findQuestById(int id)
-	{
+	public Quest findQuestById(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Quest quest = (Quest)session.get(Quest.class, id);
+		Quest quest = (Quest) session.get(Quest.class, id);
 		return quest;
 	}
-	
+
 	@Transactional
 	public List findAll() {
 		Session session = sessionFactory.getCurrentSession();
 		List quests = session.createQuery("from Quest").list();
 		return quests;
 	}
-	
+
 	@Transactional
-	public boolean saveQuest(Quest quest)
-	{
+	public boolean saveQuest(Quest quest) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.save(quest);
@@ -43,10 +42,9 @@ public class QuestDAO {
 			return false;
 		}
 	}
-	
+
 	@Transactional
-	public boolean deleteQuest(Quest quest)
-	{
+	public boolean deleteQuest(Quest quest) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			session.delete(quest);
@@ -56,15 +54,14 @@ public class QuestDAO {
 		}
 	}
 
+	@Transactional
 	public Quest findQuestByTitle(String name) {
-		try {
-			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from Quest where title = :title");
-			query.setParameter("title", name);
-			Quest quest = (Quest)query.uniqueResult();
-			return quest;
-		} catch (HibernateException e) {
+		Session session = sessionFactory.getCurrentSession();
+		List quests = session.createQuery(
+				"from Quest where title = \'" + name + "\'").list();
+		if (quests.size() != 0)
+			return (Quest) quests.get(0);
+		else
 			return null;
-		}
 	}
 }
