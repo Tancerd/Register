@@ -9,5 +9,6 @@ public interface DoneQuestService {
 	public List<DoneQuest> getAllQuests();
 	public DoneQuest getQuestById(int id);
 	public boolean removeQuest(String userName);
+	boolean createDoneQuest(DoneQuest doneQuest);
 	
 }

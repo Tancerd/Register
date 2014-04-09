@@ -28,7 +28,7 @@ public class DoneQuestsDAO {
 	@Transactional
 	public List findAll() {
 		Session session = sessionFactory.getCurrentSession();
-		List doneQuests = session.createQuery("from DoneQuests").list();
+		List doneQuests = session.createQuery("from DoneQuest").list();
 		return doneQuests;
 	}
 	
@@ -43,6 +43,18 @@ public class DoneQuestsDAO {
 			System.err.println(e);
 			return false;
 		}
+	}
+	@Transactional
+	public boolean create(DoneQuest doneQuest) {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			session.save(doneQuest);
+			return true;
+			}
+			catch (Exception e) {
+				System.err.println(e);
+				return false;
+			}
 	}
 	
 	

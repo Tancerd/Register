@@ -39,4 +39,10 @@ public class QuestServiceImpl implements QuestService {
 		return questDAO.saveQuest(quest);
 	}
 
+	@Override
+	public Quest getQuestByTitle(String name) {
+		return questDAO.findQuestByTitle(name);
+		
+	}
+
 }

@@ -3,6 +3,7 @@ package org.pwr.register.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.pwr.register.model.Quest;
@@ -52,6 +53,18 @@ public class QuestDAO {
 			return true;
 		} catch (HibernateException e) {
 			return false;
+		}
+	}
+
+	public Quest findQuestByTitle(String name) {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			Query query = session.createQuery("from Quest where title = :title");
+			query.setParameter("title", name);
+			Quest quest = (Quest)query.uniqueResult();
+			return quest;
+		} catch (HibernateException e) {
+			return null;
 		}
 	}
 }

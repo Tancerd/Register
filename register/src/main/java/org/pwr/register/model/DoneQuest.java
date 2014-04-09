@@ -1,5 +1,7 @@
 package org.pwr.register.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,14 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 @Entity
-@Table(name = "done_quest", uniqueConstraints = {
+@Table(name = "done_quests", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "id") })
 public class DoneQuest {
 
@@ -25,12 +26,12 @@ public class DoneQuest {
 	private Integer id;
 	
 	@JoinColumn(name = "game")
-	@OneToOne(fetch = FetchType.EAGER)
-	private Integer gameId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private UserGame userGame;
 	
 	@JoinColumn(name = "quest")
 	@OneToOne(fetch = FetchType.EAGER)
-	private String questName;
+	private Quest quest;
 	
 	@Column(name = "extra_points", nullable = true, unique = false)
 	private Integer extraPoints;
@@ -62,20 +63,21 @@ public class DoneQuest {
 		this.doneTime = doneTime;
 	}
 
-	public Integer getGameId() {
-		return gameId;
+	public UserGame getUserGame() {
+		return userGame;
 	}
 
-	public void setGameId(Integer gameId) {
-		this.gameId = gameId;
+	public void setUserGame(UserGame userGame) {
+		this.userGame = userGame;
 	}
 
-	public String getQuestName() {
-		return questName;
+	public Quest getQuest() {
+		return quest;
 	}
 
-	public void setQuest(String questName) {
-		this.questName = questName;
+	public void setQuest(Quest quest) {
+		this.quest = quest;
 	}
+
 	
 }

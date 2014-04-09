@@ -2,13 +2,12 @@ package org.pwr.register.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.pwr.register.model.DoneQuest;
 import org.pwr.register.support.JsonDateSerializer;
 
 
@@ -18,9 +17,8 @@ public class UserGameDTO implements Serializable{
 	
 	private String user;
 	private int points;
-	private Set<DoneQuest> listDoneQuest;
+	private List<DoneQuestDTO> setDoneQuestDTO;
 	private Date endTime;
-	
 	
 	public String getUser() {
 		return user;
@@ -34,6 +32,12 @@ public class UserGameDTO implements Serializable{
 	public void setPoints(int points) {
 		this.points = points;
 	}
+	public List<DoneQuestDTO> getSetDoneQuestDTO() {
+		return setDoneQuestDTO;
+	}
+	public void setSetDoneQuestDTO(List<DoneQuestDTO> setDoneQuestDTO) {
+		this.setDoneQuestDTO = setDoneQuestDTO;
+	}
 	@JsonSerialize(using = JsonDateSerializer.class)
 	public Date getEndTime() {
 		return endTime;
@@ -41,9 +45,9 @@ public class UserGameDTO implements Serializable{
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
-	public void setDoneQuests(Set<DoneQuest> doneQuests) {
-		this.listDoneQuest = doneQuests;
-	}
+	
+	
+	
 	
 	
 }

@@ -2,6 +2,7 @@ package org.pwr.register.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "user_game", uniqueConstraints = {
@@ -34,8 +34,8 @@ public class UserGame implements Serializable{
 	private Date endTime;  
 	@Column(name = "points")
 	private Integer points;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="game")
-	private Set<DoneQuest> doneQuests;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="userGame")
+	private List<DoneQuest> doneQuests;
 	
 	public int getId() {
 		return id;
@@ -61,10 +61,10 @@ public class UserGame implements Serializable{
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	public Set<DoneQuest> getDoneQuests() {
+	public List<DoneQuest> getDoneQuests() {
 		return doneQuests;
 	}
-	public void setDoneQuests(Set<DoneQuest> doneQuests) {
+	public void setDoneQuests(List<DoneQuest> doneQuests) {
 		this.doneQuests = doneQuests;
 	}
 }

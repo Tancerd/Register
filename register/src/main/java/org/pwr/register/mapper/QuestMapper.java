@@ -20,6 +20,7 @@ public class QuestMapper {
 			
 			questDTO.setDefaultPoints(quest.getDefaultPoints());
 			questDTO.setDefaultTime(quest.getDefaultTime());
+			questDTO.setName(quest.getName());
 		}
 
 		return questDTO;
@@ -31,6 +32,14 @@ public class QuestMapper {
 			listQuestDTO.add(map(quest));
 		}
 		return listQuestDTO;
+	}
+
+	public Quest map(QuestDTO questDTO) {
+		Quest quest = new Quest();
+		quest.setDefaultPoints(questDTO.getDefaultPoints());
+		quest.setDefaultTime(questDTO.getDefaultTime());
+		quest.setName(questDTO.getName());
+		return quest;
 	}
 	
 }

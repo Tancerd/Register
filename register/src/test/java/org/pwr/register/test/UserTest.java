@@ -20,7 +20,7 @@ import com.sun.jersey.api.client.filter.LoggingFilter;
 public class UserTest {
 	private WebResource webResource;
 	private Client client;
-	private static final String BASE_URI = "http://localhost:8080/register/register/";
+	private static final String BASE_URI = "http://localhost:8080/register/adminPanel/createUser/";
 	
 	@Before
 	public void prepareConnection()

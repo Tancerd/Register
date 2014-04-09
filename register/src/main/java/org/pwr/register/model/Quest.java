@@ -8,8 +8,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "quest", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "id") })
 public class Quest {
 
 	@Id
@@ -22,6 +26,9 @@ public class Quest {
 
 	@Column(name = "default_points")
 	private int defaultPoints;
+	
+	@Column(name = "title")
+	private String name;
 
 	public Quest() {
 
@@ -56,4 +63,13 @@ public class Quest {
 		this.defaultPoints = defaultPoints;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
 }
