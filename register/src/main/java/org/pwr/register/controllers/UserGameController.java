@@ -1,6 +1,7 @@
 package org.pwr.register.controllers;
 
 import org.pwr.register.dto.DoneQuestDTO;
+import org.pwr.register.dto.UserDTO;
 import org.pwr.register.dto.UserGameDTO;
 import org.pwr.register.mapper.DoneQuestsMapper;
 import org.pwr.register.mapper.UserGameMapper;
@@ -8,6 +9,8 @@ import org.pwr.register.model.DoneQuest;
 import org.pwr.register.service.DoneQuestService;
 import org.pwr.register.service.UserGameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -41,14 +44,19 @@ public class UserGameController {
 		return gameUserMapper.map(userGameService.getUserGameByLogin(name));
 	}
 	
-	@RequestMapping(value ="/doneQuest/", method = RequestMethod.POST, consumes = "application/json")
-	public void createDoneQuest(@RequestBody DoneQuestDTO doneQuestDTO)
+	@RequestMapping(value ="/doneQuest/", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	public @ResponseBody ResponseEntity<DoneQuestDTO> createDoneQuest(@RequestBody DoneQuestDTO doneQuestDTO)
 	{
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String name = auth.getName();
 		DoneQuest doneQuest = doneQuestsMapper.map(doneQuestDTO, name);
-		doneQuestService.createDoneQuest(doneQuest);
+
+		if (doneQuestService.createDoneQuest(doneQuest)) {
+			return new ResponseEntity<DoneQuestDTO>(doneQuestDTO, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<DoneQuestDTO>(doneQuestDTO, HttpStatus.CONFLICT);
+		}
 	}
 
 }

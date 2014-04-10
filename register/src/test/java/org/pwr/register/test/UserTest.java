@@ -20,7 +20,7 @@ import com.sun.jersey.api.client.filter.LoggingFilter;
 public class UserTest {
 	private WebResource webResource;
 	private Client client;
-	private static final String BASE_URI = "http://localhost:8080/register/adminPanel/createUser/";
+	private static final String BASE_URI = "http://virt2.iiar.pwr.wroc.pl:8080/register/adminPanel/createUser/";
 	
 	@Before
 	public void prepareConnection()
@@ -34,7 +34,7 @@ public class UserTest {
 	@Test
 	public void correctLoginAdmin()
 	{
-		client.addFilter(new HTTPBasicAuthFilter("test2", "test2"));
+		client.addFilter(new HTTPBasicAuthFilter("adm", "ini"));
 		ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
 		assertEquals(204, response.getStatus());
@@ -43,7 +43,7 @@ public class UserTest {
 	@Test
 	public void post()
 	{
-		client.addFilter(new HTTPBasicAuthFilter("test2", "test2"));
+		client.addFilter(new HTTPBasicAuthFilter("adm", "ini"));
 		ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).post(
 				ClientResponse.class, creatTestUser());
 	/*
@@ -57,8 +57,8 @@ public class UserTest {
 	
 	private UserDTO creatTestUser() {
 		UserDTO user = new UserDTO();
-		user.setLogin("POST3");
-		user.setPassword("POST");
+		user.setLogin("Krzysiek");
+		user.setPassword("test");
 		return user;
 	}
 

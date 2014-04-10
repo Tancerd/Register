@@ -19,8 +19,8 @@ import com.sun.jersey.api.client.filter.LoggingFilter;
 public class GameTest {
 	private WebResource webResource;
 	private Client client;
-	private static final String GAME_URI = "http://localhost:8080/register/adminPanel/game/michal";
-	private static final String NEWGAME_URI = "http://localhost:8080/register/adminPanel/newGame/michal";
+	private static final String GAME_URI = "http://virt2.iiar.pwr.wroc.pl:8080/registerr/adminPanel/game/michal";
+	private static final String NEWGAME_URI = "http://virt2.iiar.pwr.wroc.pl:8080/register/adminPanel/newGame/Krzysiek";
 	
 	@Before
 	public void prepareConnection()
@@ -35,13 +35,13 @@ public class GameTest {
 	public void createNewGame()
 	{
 		webResource = client.resource(NEWGAME_URI);
-		client.addFilter(new HTTPBasicAuthFilter("test2", "test2"));
+		client.addFilter(new HTTPBasicAuthFilter("adm", "ini"));
 		ClientResponse response = webResource.accept("application/json")
                 .get(ClientResponse.class);
 		assertEquals(204, response.getStatus());
 	}
 	
-	@Test
+	//@Test
 	public void deleteGame()
 	{
 		webResource = client.resource(GAME_URI);
@@ -52,7 +52,7 @@ public class GameTest {
 		assertEquals(204, response.getStatus()); 
 	}
 	
-	@Test
+	//@Test
 	public void getGame() {
 		webResource = client.resource(GAME_URI);
 		client.addFilter(new HTTPBasicAuthFilter("test2", "test2"));
