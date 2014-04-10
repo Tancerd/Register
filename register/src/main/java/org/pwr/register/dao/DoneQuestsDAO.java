@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.pwr.register.model.DoneQuest;
 import org.pwr.register.model.Quest;
+import org.pwr.register.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -32,10 +33,12 @@ public class DoneQuestsDAO {
 	}
 
 	@Transactional
-	public boolean deleteDoneQuest(String doneQuest) {
+	public boolean deleteDoneQuests(User user) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.delete(doneQuest);
+			for (DoneQuest doneQuest : user.getUserGame().getDoneQuests()) {
+				session.delete(doneQuest);
+			}
 			return true;
 		} catch (Exception e) {
 			System.err.println(e);

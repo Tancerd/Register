@@ -3,7 +3,9 @@ package org.pwr.register.serviceImpl;
 import java.util.List;
 
 import org.pwr.register.dao.DoneQuestsDAO;
+import org.pwr.register.dao.UserDAO;
 import org.pwr.register.model.DoneQuest;
+import org.pwr.register.model.User;
 import org.pwr.register.service.DoneQuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,23 +15,26 @@ public class DoneQuestServiceImpl implements DoneQuestService{
 
 	@Autowired
 	DoneQuestsDAO doneQuestsDAO;
+
+	@Autowired
+	UserDAO userDAO;
 	
-	@Override
-	public List<DoneQuest> getAllQuests() {
+	public List<DoneQuest> getAllDoneQuests() {
 		return doneQuestsDAO.findAll();
 	}
 
-	@Override
 	public DoneQuest getQuestById(int id) {
 		return doneQuestsDAO.findQuestById(id);
 	}
 
-	@Override
-	public boolean removeQuest(String doneQuest) {
-		return doneQuestsDAO.deleteDoneQuest(doneQuest);
+	public boolean removeQuests(String userName) {
+		User user = userDAO.findByLogin(userName);
+		if (user != null) {
+			return doneQuestsDAO.deleteDoneQuests(user);
+		}
+		return false;
 	}
 
-	@Override
 	public boolean createDoneQuest(DoneQuest doneQuest)
 	{
 		return doneQuestsDAO.create(doneQuest);

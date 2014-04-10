@@ -6,9 +6,9 @@ import org.pwr.register.model.DoneQuest;
 
 public interface DoneQuestService {
 
-	public List<DoneQuest> getAllQuests();
+	public List<DoneQuest> getAllDoneQuests();
 	public DoneQuest getQuestById(int id);
-	public boolean removeQuest(String userName);
+	public boolean removeQuests(String userName);
 	boolean createDoneQuest(DoneQuest doneQuest);
 	
 }

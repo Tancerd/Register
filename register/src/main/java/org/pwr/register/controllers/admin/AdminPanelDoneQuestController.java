@@ -28,13 +28,12 @@ public class AdminPanelDoneQuestController {
 
 	@RequestMapping(value = "/allDoneQuests/", method = RequestMethod.GET)
 	public @ResponseBody List getAllDoneQuests() {
-		return doneQuestsMapper.map(doneQuestService.getAllQuests());
-
+		return doneQuestsMapper.map(doneQuestService.getAllDoneQuests());
 	}
 
 	@RequestMapping(value = "/doneQuest/{userName}", method = RequestMethod.DELETE)
 	public boolean removeDoneQuest(@PathVariable String userName) {
-		return doneQuestService.removeQuest(userName);
+		return doneQuestService.removeQuests(userName);
 	}
 
 }

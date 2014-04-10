@@ -15,32 +15,27 @@ public class UserGameServiceImpl implements UserGameService {
 
 	@Autowired
 	private UserGameDAO userGameDAO;
-
 	
 	@Autowired
 	private UserDAO userDAO;
 
-	@Override
 	public UserGame getUserGameByLogin(String login) {
 		return userGameDAO.getUserGameByID(login);
 	}
 
-	@Override
 	public List getAllUsersGames() {
 		return userGameDAO.getAllUsersGames();
 	}
 
-	@Override
+	 
 	public boolean addUserGame(UserGame userGame) {
 		return userGameDAO.save(userGame);
 	}
 
-	@Override
 	public boolean createNewGame(String login) {
 		return userGameDAO.createNewGame(login);
 	}
 
-	@Override
 	public void deleteGameByUserLogin(String login) {
 		User user = userDAO.findByLogin(login);
 		if (user != null) {
@@ -48,7 +43,6 @@ public class UserGameServiceImpl implements UserGameService {
 		}
 	}
 
-	@Override
 	public List getAllDoneQuests(String login) {
 		User user = userDAO.findByLogin(login);
 		if (user != null) {
