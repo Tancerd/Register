@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: register
+Bundle-SymbolicName: register
+Bundle-Version: 1.0.0.qualifier
+Export-Package: org.pwr.register.background,
+ org.pwr.register.controllers,
+ org.pwr.register.controllers.admin,
+ org.pwr.register.dao,
+ org.pwr.register.dto,
+ org.pwr.register.mapper,
+ org.pwr.register.model,
+ org.pwr.register.service,
+ org.pwr.register.serviceImpl,
+ org.pwr.register.support,
+ org.pwr.register.test
