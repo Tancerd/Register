@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.pwr.register.dto.UserDTO;
 import org.pwr.register.model.User;
+import org.pwr.register.support.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +52,7 @@ public class UserDAO {
 				user.setLogin(userData.getLogin());
 			}
 			if (!userData.getPassword().equals("")) {
-				user.setPassword(userData.getPassword());
+				user.setPassword(MD5.getHash(userData.getPassword()));
 			}
 			/*if (`!userData.getEmail().equals("")) {
 				user.setEmail(userData.getEmail());)

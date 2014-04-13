@@ -6,6 +6,7 @@ import org.pwr.register.dao.UserDAO;
 import org.pwr.register.dto.UserDTO;
 import org.pwr.register.model.User;
 import org.pwr.register.service.UserService;
+import org.pwr.register.support.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public boolean registerUser(User user) {
+		user.setPassword(MD5.getHash(user.getPassword()));
 		return userDAO.save(user);
 	}
 
