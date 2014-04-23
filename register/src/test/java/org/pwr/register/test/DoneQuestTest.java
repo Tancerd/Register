@@ -23,8 +23,9 @@ public class DoneQuestTest {
 
 	private WebResource webResource;
 	private Client client;
-	private static final String QUEST_URI = "http://virt2.iiar.pwr.wroc.pl:8080/register/commonPanel/doneQuest/";
-	
+	//private static final String QUEST_URI = "http://virt2.iiar.pwr.wroc.pl:8080/register/commonPanel/doneQuest/";
+	private static final String QUEST_URI = "http://localhost:8080/register/commonPanel/doneQuest/";
+
 	@Before
 	public void prepareConnection()
 	{
@@ -38,10 +39,10 @@ public class DoneQuestTest {
 	public void sentDoneTest()
 	{
 		webResource = client.resource(QUEST_URI);
-		client.addFilter(new HTTPBasicAuthFilter("dsa", "dsa"));
+		client.addFilter(new HTTPBasicAuthFilter("Krzysiek", "test"));
 		ClientResponse response = webResource.type(MediaType.APPLICATION_JSON)
                 .post(ClientResponse.class, createInstance());
-		assertEquals(204, response.getStatus());
+		assertEquals(202, response.getStatus());
 	}
 	
 	public DoneQuestDTO createInstance()
@@ -53,7 +54,7 @@ public class DoneQuestTest {
 		QuestDTO questDTO = new QuestDTO();
 		questDTO.setDefaultPoints(20);
 		questDTO.setDefaultTime(new Date());
-		questDTO.setName("POSTQuest");
+		questDTO.setName("POSTQuest11");
 		doneQuestDTO.setQuestDTO(questDTO);
 		
 		return doneQuestDTO;

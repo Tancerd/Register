@@ -37,6 +37,12 @@ public class DoneQuestServiceImpl implements DoneQuestService{
 
 	public boolean createDoneQuest(DoneQuest doneQuest)
 	{
+		List<DoneQuest> doneQuestList = doneQuestsDAO.findAll();
+		for (DoneQuest dQ : doneQuestList)
+		{
+			if (dQ.getQuest().getId() == doneQuest.getQuest().getId() && dQ.getUserGame().getId() == doneQuest.getUserGame().getId())
+				return true;
+		}
 		return doneQuestsDAO.create(doneQuest);
 	}
 }

@@ -37,7 +37,7 @@ public class AdminPanelQuestController {
 	private QuestMapper questMapper;
 
 	@RequestMapping(value = "/allQuests/", method = RequestMethod.GET)
-	public List getAllQuests() {
+	public @ResponseBody List getAllQuests() {
 		return questService.getAllQuests();
 	}
 
