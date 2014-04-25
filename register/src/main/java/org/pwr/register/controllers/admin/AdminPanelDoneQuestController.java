@@ -7,6 +7,8 @@ import org.pwr.register.mapper.DoneQuestsMapper;
 import org.pwr.register.model.DoneQuest;
 import org.pwr.register.service.DoneQuestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,8 +34,13 @@ public class AdminPanelDoneQuestController {
 	}
 
 	@RequestMapping(value = "/doneQuest/{userName}", method = RequestMethod.DELETE)
-	public boolean removeDoneQuest(@PathVariable String userName) {
-		return doneQuestService.removeQuests(userName);
+	public ResponseEntity removeDoneQuest(@PathVariable String userName) {
+		
+		if (doneQuestService.removeQuests(userName)) {
+			return new ResponseEntity<Object>(null, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);
+		}
 	}
 
 }

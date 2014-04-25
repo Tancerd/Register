@@ -40,5 +40,15 @@ public class AdminPanelQuestController {
 	public @ResponseBody List getAllQuests() {
 		return questService.getAllQuests();
 	}
+	
+	@RequestMapping(value="/deleteQuest/{questId}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> deleteQuest(@PathVariable int questId) {
+		if (questService.deleteQuest(questId)) {
+			return new ResponseEntity<String>(String.valueOf(questId), HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<String>(String.valueOf(questId),
+					HttpStatus.UNPROCESSABLE_ENTITY);
+		}
+	}
 
 }

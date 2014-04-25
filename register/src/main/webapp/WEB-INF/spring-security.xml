@@ -13,7 +13,6 @@
 		<intercept-url pattern="/adminPanel/**" access="ROLE_ADMIN" />
 	</http>
 
-
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="myDataSource"
