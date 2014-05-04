@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.pwr.register.dao.UserDAO;
 import org.pwr.register.dao.UserGameDAO;
+import org.pwr.register.model.DoneQuest;
 import org.pwr.register.model.User;
 import org.pwr.register.model.UserGame;
 import org.pwr.register.service.UserGameService;
@@ -49,6 +50,23 @@ public class UserGameServiceImpl implements UserGameService {
 			return userGameDAO.getAllDoneQuests();
 		}
 		return null; 
+	}
+
+	@Override
+	public boolean countPoints(String name) {
+		UserGame userGame = userGameDAO.getUserGameByID(name);
+		if (userGame.getPoints() > 0) return false;
+		int result = 0;
+		for (DoneQuest gQ : userGame.getDoneQuests())
+		{
+			result += gQ.getExtraPoints() + gQ.getQuest().getDefaultPoints();
+			if (gQ.getDoneTime().after(gQ.getQuest().getDefaultTime()))
+				result -= 1; //TODO:
+		}
+		userGame.setPoints(result);
+		userGameDAO.save(userGame);
+		return true;
+		
 	}
 	
 }

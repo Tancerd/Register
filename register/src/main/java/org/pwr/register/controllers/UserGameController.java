@@ -58,5 +58,22 @@ public class UserGameController {
 			return new ResponseEntity<DoneQuestDTO>(doneQuestDTO, HttpStatus.CONFLICT);
 		}
 	}
+	
+	@RequestMapping(value="/endGame/", method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<Object> endGameAndCountPoints()
+	{
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String name = auth.getName();
+		
+		if (userGameService.countPoints(name))
+		{
+			return new ResponseEntity<Object>(null, HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<Object>(null, HttpStatus.IM_USED);
+		}
+	}
 
 }

@@ -11,4 +11,5 @@ public interface UserGameService {
 	public boolean createNewGame(String login);
 	public void deleteGameByUserLogin(String login);
 	public List getAllDoneQuests(String user);
+	public boolean countPoints(String name);
 }

@@ -39,7 +39,7 @@ public class UserGameDAO {
 	public boolean save(UserGame userGame) {
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			session.save(userGame);
+			session.saveOrUpdate(userGame);
 			return true;
 		} catch (HibernateException e) {
 			return false;
