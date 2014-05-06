@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
 	public boolean updateUser(UserDTO userData, String login) {
 		User user = userDAO.findByLogin(login);
-		if (user != null && userDAO.findByLogin(userData.getLogin()) == null) {
+		if (user != null /*&& userDAO.findByLogin(userData.getLogin()) == null*/) {
 			return userDAO.saveOrUpdate(user, userData);
 		}
 		return false;
