@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/commonPanel")
 public class FileController {
 
 	@RequestMapping(value = "/download/", method = RequestMethod.GET)
@@ -38,7 +37,7 @@ public class FileController {
 	    
 	}
 	
-	@RequestMapping(value = "update/" , method = RequestMethod.GET)
+	@RequestMapping(value = "/update/" , method = RequestMethod.GET)
 	public @ResponseBody String checkUpdate()
 	{
 		return getNewestFile().getName();

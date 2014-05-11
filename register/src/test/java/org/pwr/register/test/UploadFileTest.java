@@ -46,7 +46,7 @@ public class UploadFileTest {
 	}
 
 	private FormDataMultiPart createInstance() {
-		File f = new File("C:/Users/Tancerd/Desktop/test.zip");
+		File f = new File("C:/Users/Tancerd/Downloads/LoW_Pack_vs_1.zip");
 		FileDataBodyPart fdp = new FileDataBodyPart("file", f,
 				MediaType.APPLICATION_OCTET_STREAM_TYPE);
 
