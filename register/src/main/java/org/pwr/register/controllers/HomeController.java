@@ -2,6 +2,7 @@ package org.pwr.register.controllers;
 
 import java.util.List;
 
+import org.pwr.register.controllers.admin.AdminPanelFileController;
 import org.pwr.register.dto.UserDTO;
 import org.pwr.register.dto.UserGameDTO;
 import org.pwr.register.mapper.UserGameMapper;
@@ -37,6 +38,8 @@ public class HomeController {
 	{
 		return "home";
 	}
+	
+	/*
 	
 	@RequestMapping(value = "/test/{login}", produces = "application/json")
 	public @ResponseBody UserGameDTO testPage(@PathVariable String login)
@@ -80,4 +83,5 @@ public class HomeController {
 	{
 		questService.deleteQuest(id);
 	}
+	*/
 }

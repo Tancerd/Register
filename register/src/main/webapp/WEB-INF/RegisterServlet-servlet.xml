@@ -47,6 +47,7 @@
 					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
 				<bean
 					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
 			</list>
 		</property>
 	</bean>

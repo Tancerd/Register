@@ -1,7 +1,14 @@
 package org.pwr.register.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.pwr.register.dto.DoneQuestDTO;
-import org.pwr.register.dto.UserDTO;
 import org.pwr.register.dto.UserGameDTO;
 import org.pwr.register.mapper.DoneQuestsMapper;
 import org.pwr.register.mapper.UserGameMapper;
@@ -75,5 +82,6 @@ public class UserGameController {
 			return new ResponseEntity<Object>(null, HttpStatus.IM_USED);
 		}
 	}
-
+	
+	
 }
