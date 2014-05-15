@@ -20,7 +20,7 @@ import com.sun.jersey.api.client.filter.LoggingFilter;
 public class UserTest {
 	private WebResource webResource;
 	private Client client;
-	private static final String BASE_URI = "http://virt2.iiar.pwr.wroc.pl:8080/register/adminPanel/createUser/";
+	private static final String BASE_URI = "http://virt2.iiar.pwr.wroc.pl:8080/kurwa_mac/adminPanel/createUser/";
 	
 	@Before
 	public void prepareConnection()

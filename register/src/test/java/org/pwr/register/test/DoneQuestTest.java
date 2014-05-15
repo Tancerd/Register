@@ -23,8 +23,8 @@ public class DoneQuestTest {
 
 	private WebResource webResource;
 	private Client client;
-	//private static final String QUEST_URI = "http://virt2.iiar.pwr.wroc.pl:8080/register/commonPanel/doneQuest/";
-	private static final String QUEST_URI = "http://localhost:8080/register/commonPanel/doneQuest/";
+	private static final String QUEST_URI = "http://virt2.iiar.pwr.wroc.pl:8080/register/commonPanel/doneQuest/";
+	//private static final String QUEST_URI = "http://localhost:8080/register/commonPanel/doneQuest/";
 
 	@Before
 	public void prepareConnection()
