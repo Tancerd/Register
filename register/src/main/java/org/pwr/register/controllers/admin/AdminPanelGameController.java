@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /*
  * All Games, Delete Game by user login, create game for user by his login, 
@@ -40,7 +39,7 @@ public class AdminPanelGameController {
 		return new ResponseEntity<String>(userName, HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/newGame/{login}", method = RequestMethod.GET)
+	@RequestMapping(value = "/newGame/{login}", method = RequestMethod.POST)
 	public ResponseEntity<Object> createNewGame(@PathVariable String login) {
 		if (userGameService.createNewGame(login)) {
 			return new ResponseEntity<Object>(null, HttpStatus.CREATED);
