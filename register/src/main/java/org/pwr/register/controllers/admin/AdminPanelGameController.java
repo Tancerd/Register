@@ -40,7 +40,7 @@ public class AdminPanelGameController {
 		return new ResponseEntity<String>(userName, HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/newGame/{login}", method = RequestMethod.GET)
+	@RequestMapping(value = "/newGame/{login}", method = RequestMethod.POST)
 	public ResponseEntity<Object> createNewGame(@PathVariable String login) {
 		if (userGameService.createNewGame(login)) {
 			return new ResponseEntity<Object>(null, HttpStatus.CREATED);

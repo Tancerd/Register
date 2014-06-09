@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.pwr.register.controllers.admin.AdminPanelFileController;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,11 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class FileController {
 
-	@RequestMapping(value = "/download/", method = RequestMethod.GET)
-	public void getFileDownload(HttpServletResponse response) {
+	@RequestMapping(value = "/download/{fileName:.+}", method = RequestMethod.GET)
+	public void getFileDownload(@PathVariable String fileName, HttpServletResponse response) {
 	    //String path = "C:/Program Files/Apache Software Foundation/Tomcat 7.0/webapps/register/WEB-INF/resources/temat_inz.zip";
-	    String path = getNewestFile().getAbsolutePath();
-	    String name = getNewestFile().getName();
+	    //String path = getNewestFile().getAbsolutePath();
+		String path = FileController.getResourcesPath() + "/" + fileName;
+	    String name = fileName;
 	    try {
 	        // get your file as InputStream
 	        InputStream is = new FileInputStream(path);
@@ -32,7 +34,7 @@ public class FileController {
 	        response.setHeader("Content-Disposition", "attachment; filename=" + name);
 	        response.flushBuffer();
 	      } catch (IOException ex) {
-	        throw new RuntimeException("IOError writing file to output stream");
+	        throw new RuntimeException("IOError writing file to output stream. " + path + " " + name);
 	      }
 	    
 	}
@@ -40,7 +42,7 @@ public class FileController {
 	@RequestMapping(value = "/update/" , method = RequestMethod.GET)
 	public @ResponseBody String checkUpdate()
 	{
-		return getNewestFile().getName();
+		return getNewestFile().getName().replaceFirst("[.][^.]+$", "");
 	}
 
 	private File getNewestFile() {
