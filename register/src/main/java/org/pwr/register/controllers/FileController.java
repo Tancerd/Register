@@ -30,8 +30,11 @@ public class FileController {
 	        
 	        // copy it to response's OutputStream
 	        IOUtils.copy(is, response.getOutputStream());
+	        int size = IOUtils.toByteArray(is).length;
 	        response.setContentType("application/zip");
 	        response.setHeader("Content-Disposition", "attachment; filename=" + name);
+	        response.setHeader("Content-Length", String.valueOf(size));
+	        response.setContentLength(size);
 	        response.flushBuffer();
 	      } catch (IOException ex) {
 	        throw new RuntimeException("IOError writing file to output stream. " + path + " " + name);

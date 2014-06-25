@@ -1,5 +1,6 @@
 package org.pwr.register.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.pwr.register.dao.UserDAO;
@@ -56,14 +57,17 @@ public class UserGameServiceImpl implements UserGameService {
 	public boolean countPoints(String name) {
 		UserGame userGame = userGameDAO.getUserGameByID(name);
 		if (userGame.getPoints() > 0) return false;
+		Date date = userGame.getDoneQuests().get(0).getDoneTime();
 		int result = 0;
 		for (DoneQuest gQ : userGame.getDoneQuests())
 		{
 			result += gQ.getExtraPoints() + gQ.getQuest().getDefaultPoints();
 			if (gQ.getDoneTime().after(gQ.getQuest().getDefaultTime()))
 				result -= 1; //TODO:
+			if (gQ.getDoneTime().after(date)) date = gQ.getDoneTime();
 		}
 		userGame.setPoints(result);
+		userGame.setEndTime(date);
 		userGameDAO.save(userGame);
 		return true;
 		
